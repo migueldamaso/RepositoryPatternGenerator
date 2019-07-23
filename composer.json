@@ -1,0 +1,25 @@
+{
+    "name": "paulo/repository-pattern-generator",
+    "description": "Generator for repositories easilly.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paulo Santos",
+            "email": "paulo.santos@ideavity.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Paulo\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Paulo\\RepositoryServiceProvider"
+            ]
+        }
+    }
+}

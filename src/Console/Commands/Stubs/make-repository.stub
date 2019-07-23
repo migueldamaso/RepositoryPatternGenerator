@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Repositories\Repository;
+use DummyModelImport;
+
+final class DummyRepository implements DummyContract
+{
+    use Repository;
+
+    public function __construct()
+    {
+        $this->model = DummyClass::class;
+    }
+}
