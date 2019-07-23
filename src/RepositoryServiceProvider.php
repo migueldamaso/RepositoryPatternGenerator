@@ -3,7 +3,7 @@
 namespace Paulo\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Paulo\Commands\{MakeRepository, MakeRepositoryContract};
+use Paulo\Console\Commands\{MakeRepository, MakeRepositoryContract};
 
 final class RepositoryServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,7 @@ final class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->singletons = config('respository.repositories');
+        // $this->singletons = config('respository.repositories');
     }
 
     /**

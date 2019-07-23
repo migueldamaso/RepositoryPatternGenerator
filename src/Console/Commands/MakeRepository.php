@@ -80,7 +80,7 @@ class MakeRepository extends GeneratorCommand
 	 */
 	protected function getStub()
 	{
-		return  app_path() . '/Console/Commands/Stubs/make-repository.stub';
+		return __DIR__ . '/Stubs/make-repository.stub';
     }
 
 	/**

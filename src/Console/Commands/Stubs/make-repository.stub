@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use App\Repositories\Repository;
+use Paulo\Repositories\Repository;
 use DummyModelImport;
 
 final class DummyRepository implements DummyContract
