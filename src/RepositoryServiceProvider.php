@@ -1,6 +1,6 @@
 <?php
 
-namespace Paulo\Providers;
+namespace Paulo;
 
 use Illuminate\Support\ServiceProvider;
 use Paulo\Console\Commands\{MakeRepository, MakeRepositoryContract};
