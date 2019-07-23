@@ -21,7 +21,9 @@ final class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->singletons = config('respository.repositories');
+        if (config('respository.repositories')) { 
+            $this->singletons = config('respository.repositories');
+        }
     }
 
     /**

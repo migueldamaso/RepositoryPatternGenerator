@@ -12,14 +12,15 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Paulo\\": "src/"
+            "Paulo\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Paulo\\RepositoryServiceProvider"
-            ]
+            ],
+            "dont-discover": []
         }
     }
 }
