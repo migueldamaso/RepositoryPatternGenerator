@@ -64,7 +64,7 @@ class MakeRepositoryContract extends GeneratorCommand
 	 */
 	protected function getStub()
 	{
-		return __DIR__ . '/Stubs/make-repository.stub';
+		return __DIR__ . '/Stubs/make-repository-contract.stub';
 	}
 	/**
 	 * Get the default namespace for the class.

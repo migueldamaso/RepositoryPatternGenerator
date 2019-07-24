@@ -3,6 +3,7 @@
 namespace Paulo;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\File;
 use Paulo\Console\Commands\{MakeRepository, MakeRepositoryContract};
 
 final class RepositoryServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ final class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (config('respository.repositories')) { 
+        if (File::exists(config_path('respodsitory.php'))) { 
             $this->singletons = config('respository.repositories');
         }
     }
