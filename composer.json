@@ -1,6 +1,6 @@
 {
     "name": "paulo/repository-pattern-generator",
-    "description": "Generator for repositories easilly.",
+    "description": "Generator for repositories.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,10 @@
             "email": "paulo.santos@ideavity.com"
         }
     ],
-    "require": {},
+    "version": "1.0",
+    "require": {
+        "php": ">=7.0"
+    },
     "autoload": {
         "psr-4": {
             "Paulo\\": "src"
