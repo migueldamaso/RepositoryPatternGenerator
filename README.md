@@ -21,6 +21,7 @@ You can generate repositories with a artisan make, note that the repository shou
 // generating repository for post model
 php artisan make:repository Post
 ```
+A folder will be created under name Repositories and will store all the repos.
 
 After generating a new repository you need to register it on config/repositories.php.
 ```
