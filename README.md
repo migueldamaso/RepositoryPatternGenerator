@@ -66,4 +66,4 @@ If you want to configure what actions the repository can do, you can add actions
 $this->actions = [ 'all', 'get' ];
 ```
 
-If you try to call a non listed action a "RepositoryException" will be trhown.
+If you try to call a non listed action a "RepositoryException" will be thrown.
