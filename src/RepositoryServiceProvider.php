@@ -22,7 +22,7 @@ final class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (File::exists(config_path('respodsitory.php'))) { 
+        if (File::exists(config_path('respository.php'))) {
             $this->singletons = config('respository.repositories');
         }
     }

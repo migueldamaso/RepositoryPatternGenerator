@@ -10,10 +10,12 @@ trait Repository
      * @var string model.
      */
     private $model;
+
     /**
      * @var array allowed actions.
      */
     private $actions = [ '*' ];
+
     /**
      * Get's by it's ID
      *
@@ -21,9 +23,9 @@ trait Repository
      */
     public function get(int $id)
     {
-        $this->decorateAction('get');
         return $this->model::find($id);
     }
+
     /**
      * Get's all.
      *
@@ -31,9 +33,9 @@ trait Repository
      */
     public function all()
     {
-        $this->decorateAction('all');
         return $this->model::all();
     }
+
     /**
      * Stores.
      *
@@ -41,9 +43,9 @@ trait Repository
      */
     public function store($data)
     {
-        $this->decorateAction('store');
         return $this->model::create($data);
     }
+
     /**
      * Deletes.
      *
@@ -51,9 +53,9 @@ trait Repository
      */
     public function delete(int $id)
     {
-        $this->decorateAction('delete');
         $this->model::destroy($id);
     }
+
     /**
      * Updates.
      *
@@ -62,9 +64,9 @@ trait Repository
      */
     public function update(int $id, array $data)
     {
-        $this->decorateAction('update');
         return $this->model::find($id)->update($data);
     }
+
     /**
      * Check if the current called action in in available actions. 
      *
@@ -76,6 +78,21 @@ trait Repository
     {
         if ($this->actions[0] != '*' && !in_array($action, $this->actions)) {
             throw new RepositoryException($action);
+        }
+    }
+
+    /**
+     * Apply decorator pattern.
+     *
+     * @param string $name
+     * @param $arguments
+     */
+    public function __call(string $name, $arguments)
+    {
+        $this->decorateAction($name);
+
+        if (method_exists($this, $name)) {
+            $this->{$name}();
         }
     }
 }
