@@ -21,7 +21,7 @@ trait Repository
      *
      * @param int
      */
-    public function get(int $id)
+    protected function get(int $id)
     {
         return $this->model::find($id);
     }
@@ -31,7 +31,7 @@ trait Repository
      *
      * @return mixed
      */
-    public function all()
+    protected function all()
     {
         return $this->model::all();
     }
@@ -41,7 +41,7 @@ trait Repository
      *
      * @param int
      */
-    public function store($data)
+    protected function store($data)
     {
         return $this->model::create($data);
     }
@@ -51,7 +51,7 @@ trait Repository
      *
      * @param int
      */
-    public function delete(int $id)
+    protected function delete(int $id)
     {
         $this->model::destroy($id);
     }
@@ -62,7 +62,7 @@ trait Repository
      * @param int
      * @param array
      */
-    public function update(int $id, array $data)
+    protected function update(int $id, array $data)
     {
         return $this->model::find($id)->update($data);
     }
