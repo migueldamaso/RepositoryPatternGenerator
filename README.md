@@ -27,7 +27,7 @@ After generating a new repository you need to register it on config/repositories
 ```
 'repositories' => [
     // Register here new repositories ...
-     App\Repositories\PostRepositoryContract::class => App\Repositories\PostRepository::class,
+     App\Repositories\PostRepository\PostRepositoryContract::class => App\Repositories\PostRepository\PostRepository::class,
  ],
 ```
 
@@ -35,7 +35,7 @@ Finally withing your controller you can start to inject the repositories:
 ```
 <?php
 
-use App\Repositories\ArticleRepository\ArticleRepositoryContract as Repository;
+use App\Repositories\PostRepository\PostRepositoryContract as Repository;
 
 class PostController extends Controller
 {
@@ -54,9 +54,9 @@ class PostController extends Controller
      */
      public function index()
      {
-         $articles = $this->repository->all();
-    
-         return response()->json($articles);
+         $posts = $this->repository->all();
+            
+         return response()->json(compact('posts'));
      }
 }
 ```

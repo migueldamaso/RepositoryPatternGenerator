@@ -21,8 +21,10 @@ trait Repository
      *
      * @param int
      */
-    protected function get(int $id)
+    public function get(int $id)
     {
+        $this->decorateAction('get');
+
         return $this->model::find($id);
     }
 
@@ -31,8 +33,10 @@ trait Repository
      *
      * @return mixed
      */
-    protected function all()
+    public function all()
     {
+        $this->decorateAction('all');
+
         return $this->model::all();
     }
 
@@ -41,8 +45,10 @@ trait Repository
      *
      * @param int
      */
-    protected function store($data)
+    public function store($data)
     {
+        $this->decorateAction('store');
+
         return $this->model::create($data);
     }
 
@@ -51,8 +57,10 @@ trait Repository
      *
      * @param int
      */
-    protected function delete(int $id)
+    public function delete(int $id)
     {
+        $this->decorateAction('delete');
+
         $this->model::destroy($id);
     }
 
@@ -62,8 +70,10 @@ trait Repository
      * @param int
      * @param array
      */
-    protected function update(int $id, array $data)
+    public function update(int $id, array $data)
     {
+        $this->decorateAction('update');
+
         return $this->model::find($id)->update($data);
     }
 
@@ -78,21 +88,6 @@ trait Repository
     {
         if ($this->actions[0] != '*' && !in_array($action, $this->actions)) {
             throw new RepositoryException($action);
-        }
-    }
-
-    /**
-     * Apply decorator pattern.
-     *
-     * @param string $name
-     * @param $arguments
-     */
-    public function __call(string $name, $arguments)
-    {
-        $this->decorateAction($name);
-
-        if (method_exists($this, $name)) {
-            $this->{$name}();
         }
     }
 }
