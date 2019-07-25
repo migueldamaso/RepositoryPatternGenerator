@@ -4,6 +4,7 @@ namespace Paulo;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use Paulo\Classes\RepositoryLoader;
 use Paulo\Console\Commands\{MakeRepository, MakeRepositoryContract};
 
 final class RepositoryServiceProvider extends ServiceProvider
@@ -24,6 +25,10 @@ final class RepositoryServiceProvider extends ServiceProvider
     {
         if (File::exists(config_path('respository.php'))) {
             $this->singletons = config('respository.repositories');
+
+            if (config('respository.skip_import') == true) {
+                (new RepositoryLoader)->loadRepositoriesDinamically();
+            }
         }
     }
 
