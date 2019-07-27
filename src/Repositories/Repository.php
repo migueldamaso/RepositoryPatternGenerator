@@ -3,6 +3,7 @@
 namespace Paulo\Repositories;
 
 use Paulo\Exceptions\RepositoryException;
+use Paulo\Exceptions\ResultNotFoundException;
 
 trait Repository
 {
@@ -14,7 +15,7 @@ trait Repository
     /**
      * @var array allowed actions.
      */
-    private $actions = [ '*' ];
+    private $actions = ['*'];
 
     /**
      * Get's by it's ID
@@ -74,11 +75,17 @@ trait Repository
     {
         $this->decorateAction('update');
 
-        return $this->model::find($id)->update($data);
+        $result = $this->model::find($id);
+
+        if (empty($result)) {
+            throw new ResultNotFoundException(new $this->model, $id);
+        }
+
+        return $result->update($data);
     }
 
     /**
-     * Check if the current called action in in available actions. 
+     * Check if the current called action in in available actions.
      *
      * @param string $action current called method.
      * @throws \App\Exceptions\RepositoryException
