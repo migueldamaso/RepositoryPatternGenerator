@@ -24,11 +24,12 @@ final class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         if (File::exists(config_path('respository.php'))) {
-            $this->singletons = config('respository.repositories');
 
             if (config('respository.skip_import') == true) {
                 (new RepositoryLoader)->loadRepositoriesDinamically();
             }
+
+            $this->singletons = config('respository.repositories');
         }
     }
 
