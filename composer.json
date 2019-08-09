@@ -3,12 +3,10 @@
     "description": "Generator for repositories.",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Paulo Santos",
-            "email": "paulo.santos@ideavity.com"
-        }
-    ],
+    "authors": [{
+        "name": "Paulo Santos",
+        "email": "paulo.santos@ideavity.com"
+    }],
     "version": "1.0",
     "require": {
         "php": ">=7.0"
@@ -18,6 +16,14 @@
             "Paulo\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Paulo\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -25,5 +31,8 @@
             ],
             "dont-discover": []
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.5"
     }
 }
