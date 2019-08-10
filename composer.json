@@ -33,6 +33,7 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^3.5"
+        "orchestra/testbench": "^3.5",
+        "phpunit/phpunit": "^8.3"
     }
 }

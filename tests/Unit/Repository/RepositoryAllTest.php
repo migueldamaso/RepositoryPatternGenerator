@@ -4,6 +4,7 @@ use Paulo\Test\TestCase;
 use Paulo\Test\TestUserContract;
 use Paulo\Test\TestUser;
 use Paulo\Exceptions\RepositoryException;
+use Faker\Factory as FakerFactory;
 
 class RepositoryAllTest extends TestCase
 {
@@ -19,8 +20,10 @@ class RepositoryAllTest extends TestCase
     /** @test */
     public function returns_collection_when_it_exists()
     {
-        TestUser::create(['email' => Faker\Factory::create()->email]);
-        TestUser::create(['email' => Faker\Factory::create()->email]);
+        $email = FakerFactory::create()->email;
+
+        TestUser::create([ 'email' => $email ]);
+        TestUser::create([ 'email' => $email ]);
 
         $testUserCollection = $this->testUserRepository->all();
 
