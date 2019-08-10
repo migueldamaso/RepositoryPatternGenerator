@@ -48,16 +48,31 @@ class MakeRepository extends GeneratorCommand
                 'DummyModelImport',
             ],
             [
-                $name . 'Repository',
+                $this->generateNameSpace($name),
                 $this->generateRepositoryName(),
                 $this->generateContract($this->argument('name')),
                 $this->generateModel(),
-                $this->generateModelImpoert(),
+                $this->generateModelImport(),
         ],
             $stub
         );
 
         return $this;
+    }
+
+    /**
+     * Generate Namespace.
+     * 
+     * @param string $name
+     * @return string
+     */
+    private function generateNameSpace($name): string
+    {
+        $psr4Name = explode('\\', $name)[0];
+
+        $name = str_replace( $psr4Name . '\\', config('respository.namespace'), $name );
+
+        return $name . 'Repository';
     }
 
     /**
@@ -158,9 +173,14 @@ class MakeRepository extends GeneratorCommand
         return $this->laravel['path'] . '/Repositories/' . $repo . '/' . str_replace('\\', '/', $name) . 'Repository.php';
     }
 
-    protected function generateModelImpoert()
+    /**
+     * Generate model import.
+     * 
+     * @return string
+     */
+    protected function generateModelImport()
     {
-        return 'App\\' . $this->generateModel();
+        return config('respository.namespace') . $this->generateModel();
     }
 
     /**

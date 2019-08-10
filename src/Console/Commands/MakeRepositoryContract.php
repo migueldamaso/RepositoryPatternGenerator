@@ -89,13 +89,23 @@ class MakeRepositoryContract extends GeneratorCommand
         ];
 	}
 
-	protected function generateNamespace($name)
+    /**
+     * Generate namespace.
+     *
+     * @param string $name
+     * @return string
+     */
+	protected function generateNamespace(string $name)
 	{
+        $psr4Name = explode('\\', $name)[0];
+
+        $name = str_replace( $psr4Name . '\\', config('respository.namespace'), $name );
+
 		return $name . 'Repository';
 	}
 
 	/**
-     * Generate contract impoert.
+     * Generate contract import.
      *
      * @return string
      */
