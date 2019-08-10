@@ -23,13 +23,13 @@ final class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (File::exists(config_path('respository.php'))) {
+        if (File::exists(config_path('rspository.php'))) {
 
-            if (config('respository.skip_import') == true) {
+            if (config('repository.skip_import') == true) {
                 (new RepositoryLoader)->loadRepositoriesDinamically();
             }
 
-            $this->singletons = config('respository.repositories');
+            $this->singletons = config('repository.repositories');
         }
     }
 
@@ -41,7 +41,7 @@ final class RepositoryServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/respository.php' => config_path('respository.php'),
+            __DIR__ . '/config/repository.php' => config_path('repository.php'),
         ]);
 
         $this->commands([

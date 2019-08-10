@@ -31,6 +31,11 @@ After generating a new repository you need to register it on config/repositories
  ],
 ```
 
+or you can simply set skip import to true in repository.php config and load the repos on the fly without register them.
+```
+'skip_import' => true,
+```
+
 Finally withing your controller you can start to inject the repositories:
 ```
 <?php
@@ -67,6 +72,11 @@ $this->actions = [ 'all', 'get' ];
 ```
 
 If you try to call a non listed action a "RepositoryException" will be thrown.
+
+If you want to change the location of the imports just change the namespace in repository.php config.
+```
+'namespace' => 'App\\',
+```
 
 Test:
 ```
