@@ -67,3 +67,8 @@ $this->actions = [ 'all', 'get' ];
 ```
 
 If you try to call a non listed action a "RepositoryException" will be thrown.
+
+Test:
+```
+composer test
+```
