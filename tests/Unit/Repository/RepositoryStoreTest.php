@@ -8,8 +8,16 @@ use Illuminate\Database\QueryException;
 
 class RepositoryStoreTest extends TestCase
 {
+    /**
+     * @var \Paulo\Test\TestUserRepository
+     */
     protected $testUserRepository;
 
+    /**
+     * Setup the test user repository for testing
+     *
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -17,14 +25,23 @@ class RepositoryStoreTest extends TestCase
         $this->testUserRepository = $this->app->make(TestUserContract::class);
     }
 
+    /**
+     * Store a user with a fake email
+     *
+     * @return mixed
+     */
     protected function storeFakeEmail()
     {
-        return $this->testUserRepository->store([
-            'email' => Faker\Factory::create()->email
-        ]);
+        return $this->testUserRepository->store(
+            ['email' => Faker\Factory::create()->email]
+        );
     }
 
-    /** @test */
+    /**
+     * Test if the store method creates a new user
+     *
+     * @test
+     **/
     public function it_stores_data()
     {
         $fakeEmail = Faker\Factory::create()->email;
@@ -36,14 +53,24 @@ class RepositoryStoreTest extends TestCase
         $this->assertTrue(TestUser::where('email', $fakeEmail)->exists());
     }
 
-    /** @test */
+    /**
+     * Test if the store methods throws an exception
+     * whe incorrect data is provided
+     *
+     * @test
+     **/
     public function it_throws_exception_when_incorrect_data_is_provided()
     {
         $this->expectException(QueryException::class);
         $this->testUserRepository->store([]);
     }
 
-    /** @test */
+    /**
+     * Test if the store method does not throw an error when the action property
+     * is a wildcard
+     *
+     * @test
+     */
     public function does_not_throw_a_exception_when_the_action_is_a_wildcard()
     {
         $this->testUserRepository->get(1);
@@ -51,7 +78,13 @@ class RepositoryStoreTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
+
+    /**
+     * Test if the store method does not throw an error when the action property
+     * is store
+     *
+     * @test
+     **/
     public function does_not_throw_a_exception_when_the_action_is_store()
     {
         $class = new ReflectionClass($this->testUserRepository);
@@ -64,8 +97,14 @@ class RepositoryStoreTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
-    public function does_throws_an_exception_when_the_action_is_not_store()
+
+    /**
+     * Test if the store method does throw an error the action property
+     * is not store
+     *
+     * @test
+     **/
+    public function does_throw_an_exception_when_the_action_is_not_store()
     {
         $this->expectException(RepositoryException::class);
         $class = new ReflectionClass($this->testUserRepository);

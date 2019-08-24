@@ -8,8 +8,16 @@ use Faker\Factory as FakerFactory;
 
 class RepositoryAllTest extends TestCase
 {
+    /**
+     * @var \Paulo\Test\TestUserRepository
+     */
     protected $testUserRepository;
 
+    /**
+     * Setup user repository for tests
+     *
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -17,20 +25,29 @@ class RepositoryAllTest extends TestCase
         $this->testUserRepository = $this->app->make(TestUserContract::class);
     }
 
-    /** @test */
+    /**
+     * Test if the all method returns a collection when it exists
+     *
+     * @test
+     **/
     public function returns_collection_when_it_exists()
     {
         $email = FakerFactory::create()->email;
 
-        TestUser::create([ 'email' => $email ]);
-        TestUser::create([ 'email' => $email ]);
+        TestUser::create(['email' => $email]);
+        TestUser::create(['email' => $email]);
 
         $testUserCollection = $this->testUserRepository->all();
 
         $this->assertEquals($testUserCollection->count(), 2);
     }
 
-    /** @test */
+    /**
+     * Test if the all method returns an empty collection
+     * when it does not exist
+     *
+     * @test
+     */
     public function returns_empty_collection_when_it_does_not_exist()
     {
         $emptyTestUserCollection = $this->testUserRepository->all();
@@ -38,7 +55,12 @@ class RepositoryAllTest extends TestCase
         $this->assertEquals($emptyTestUserCollection->count(), 0);
     }
 
-    /** @test */
+    /**
+     * Test if the all method does not throw an error when the action property
+     * is a wildcard
+     *
+     * @test
+     */
     public function does_not_throw_a_exception_when_the_action_is_a_wildcard()
     {
         $this->testUserRepository->all();
@@ -46,7 +68,12 @@ class RepositoryAllTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
+    /**
+     * Test if the all method does not throw an error when the action property
+     * is all
+     *
+     * @test
+     **/
     public function does_not_throw_a_exception_when_the_action_is_all()
     {
         $class = new ReflectionClass($this->testUserRepository);
@@ -59,8 +86,13 @@ class RepositoryAllTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
-    public function does_throws_an_exception_when_the_action_is_not_all()
+    /**
+     * Test if the all method does throw an error the action property
+     * is not all
+     *
+     * @test
+     **/
+    public function throws_an_exception_when_the_action_is_not_all()
     {
         $this->expectException(RepositoryException::class);
         $class = new ReflectionClass($this->testUserRepository);

@@ -20,7 +20,7 @@ trait Repository
     /**
      * Get's by it's ID
      *
-     * @param int
+     * @param int $id
      */
     public function get(int $id)
     {
@@ -44,9 +44,9 @@ trait Repository
     /**
      * Stores.
      *
-     * @param int
+     * @param array $data
      */
-    public function store($data)
+    public function store(array $data)
     {
         $this->decorateAction('store');
 
@@ -57,8 +57,10 @@ trait Repository
      * Deletes.
      *
      * @param int
+     *
+     * @return void
      */
-    public function delete(int $id)
+    public function delete(int $id): void
     {
         $this->decorateAction('delete');
 
@@ -68,8 +70,10 @@ trait Repository
     /**
      * Updates.
      *
-     * @param int
-     * @param array
+     * @param int   $id
+     * @param array $data
+     *
+     * @throws ResultNotFoundException
      */
     public function update(int $id, array $data)
     {
@@ -88,7 +92,9 @@ trait Repository
      * Check if the current called action in in available actions.
      *
      * @param string $action current called method.
+     *
      * @throws \App\Exceptions\RepositoryException
+     *
      * @return void
      */
     private function decorateAction(string $action = '*')

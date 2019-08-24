@@ -7,8 +7,16 @@ use Paulo\Exceptions\RepositoryException;
 
 class RepositoryGetTest extends TestCase
 {
+    /**
+     * @var \Paulo\Test\TestUserRepository
+     */
     protected $testUserRepository;
 
+    /**
+     * Setup the test user repository for testing
+     *
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -16,7 +24,11 @@ class RepositoryGetTest extends TestCase
         $this->testUserRepository = $this->app->make(TestUserContract::class);
     }
 
-    /** @test */
+    /**
+     * Test if the get method returns an existing user
+     *
+     * @test
+     **/
     public function returns_model_when_it_exists()
     {
         $testUser = TestUser::create(['email' => Faker\Factory::create()->email]);
@@ -26,7 +38,12 @@ class RepositoryGetTest extends TestCase
         $this->assertEquals($testUser->toArray(), $repositoryTestUser->toArray());
     }
 
-    /** @test */
+    /**
+     * Test if the get method returns null if the selected
+     * user does not exist
+     *
+     * @test
+     **/
     public function returns_null_when_it_does_not_exist()
     {
         $repositoryTestUser = $this->testUserRepository->get(1);
@@ -34,7 +51,12 @@ class RepositoryGetTest extends TestCase
         $this->assertNull($repositoryTestUser);
     }
 
-    /** @test */
+    /**
+     * Test if the get method does not throw an error when the action property
+     * is a wildcard
+     *
+     * @test
+     */
     public function does_not_throw_a_exception_when_the_action_is_a_wildcard()
     {
         $this->testUserRepository->get(1);
@@ -42,7 +64,12 @@ class RepositoryGetTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
+    /**
+     * Test if the get method does not throw an error when the action property
+     * is get
+     *
+     * @test
+     **/
     public function does_not_throw_a_exception_when_the_action_is_get()
     {
         $class = new ReflectionClass($this->testUserRepository);
@@ -55,8 +82,13 @@ class RepositoryGetTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
-    public function does_throws_an_exception_when_the_action_is_not_get()
+    /**
+     * Test if the get method does throw an error the action property
+     * is not get
+     *
+     * @test
+     **/
+    public function does_throw_an_exception_when_the_action_is_not_get()
     {
         $this->expectException(RepositoryException::class);
         $class = new ReflectionClass($this->testUserRepository);

@@ -7,7 +7,7 @@ interface TestUserContract
     /**
      * Get's a post by it's ID
      *
-     * @param int
+     * @param int $id
      */
     public function get(int $id);
 
@@ -21,22 +21,22 @@ interface TestUserContract
     /**
      * Stores a post.
      *
-     * @param mixed
+     * @param array $data
      */
-    public function store($data);
+    public function store(array $data);
 
     /**
      * Deletes a post.
      *
-     * @param int
+     * @param int $id
      */
     public function delete(int $id);
 
     /**
      * Updates a post.
      *
-     * @param int
-     * @param array
+     * @param int   $id
+     * @param array $data
      */
     public function update(int $id, array $data);
 }

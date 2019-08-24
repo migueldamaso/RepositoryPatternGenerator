@@ -7,10 +7,22 @@ use Paulo\Exceptions\RepositoryException;
 
 class RepositoryDecorateActionTest extends TestCase
 {
+    /**
+     * @var \Paulo\Test\TestUserRepository
+     */
     protected $testUserRepository;
 
+    /**
+     * @var ReflectionProperty
+     */
     protected $userRepositoryAction;
 
+    /**
+     * Initialize the test user repository and the reflection
+     * class for testing
+     *
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -26,7 +38,11 @@ class RepositoryDecorateActionTest extends TestCase
         $this->userRepositoryActionDecorate = $method;
     }
 
-    /** @test */
+    /**
+     * Test if actions pass if the actions property is a wildcard
+     *
+     * @test
+     **/
     public function passes_when_actions_has_wildcard()
     {
         $this->userRepositoryAction->setValue($this->testUserRepository, ['*']);
@@ -36,7 +52,12 @@ class RepositoryDecorateActionTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
+    /**
+     * Test if actions pass if the actions property has
+     * the invoked method name
+     *
+     * @test
+     **/
     public function passes_when_decorate_actions_has_existing_action()
     {
         $this->userRepositoryAction->setValue($this->testUserRepository, ['post']);
@@ -46,8 +67,13 @@ class RepositoryDecorateActionTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /** @test */
-    public function throws_exception_when_decorate_actions_has_unexistent_action()
+    /**
+     * Test if an exception is thrown when the actions property
+     * does not have the invoked method name
+     *
+     * @test
+     **/
+    public function throw_exception_when_decorate_actions_has_unexistent_action()
     {
         $this->expectException(RepositoryException::class);
         $this->userRepositoryAction->setValue($this->testUserRepository, ['post']);
